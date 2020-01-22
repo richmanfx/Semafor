@@ -3,19 +3,18 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	_ "gopkg.in/goracle.v2"
+	_ "github.com/godror/godror"
 )
 
-func main()  {
-	db, err := sql.Open("goracle", "scott/tiger@10.0.1.127:1521/orclpdb1")
+func main() {
+	db, err := sql.Open("godror", "system/oracle@localhost:1521/xe")
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 	defer db.Close()
 
-
-	rows,err := db.Query("select sysdate from dual")
+	rows, err := db.Query("select sysdate from dual")
 	if err != nil {
 		fmt.Println("Error running query")
 		fmt.Println(err)
@@ -31,4 +30,3 @@ func main()  {
 	fmt.Printf("The date is: %s\n", thedate)
 
 }
-
